@@ -24,7 +24,6 @@ const App = () => {
           name="email"
           placeholder="ex: jhon@doe.com"
           ref={register({ required: true })}
-          errorMessage="Mensagem padrão"
         />
         <Input
           name="password"
