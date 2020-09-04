@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Page } from '../../App';
+import { AppContext } from '../../App.context';
 import { Input } from '../../components/input/input';
 
 interface CredentialProps {
@@ -13,8 +15,11 @@ const Credentials = () => {
     mode: 'onChange',
   });
 
+  const { setCurrentPage } = useContext(AppContext);
+
   const onSubmit = (data: CredentialProps) => {
     console.log(data);
+    setCurrentPage(Page.Address);
   };
 
   return (
