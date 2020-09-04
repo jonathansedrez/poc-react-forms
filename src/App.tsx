@@ -1,41 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+// import { Credentials, Address, Survey } from './containers';
 
-import { useForm } from 'react-hook-form';
-import { Input } from './components/input/input';
+import Credentials from './containers/credentials/credentials';
+import Address from './containers/address/address';
+import Survey from './containers/survey/survey';
 
-interface Credentials {
-  email: string;
-  password: string;
+const Pages = {
+  credentials: <Credentials />,
+  address: <Address />,
+  survey: <Survey />,
+};
+
+export enum CurrentPage {
+  Credentials = 'credentials',
+  Address = 'address',
+  Survey = 'survey',
 }
 
 const App = () => {
-  const { handleSubmit, register, formState } = useForm<Credentials>({
-    mode: 'onChange',
-  });
-
-  const onSubmit = (data: Credentials) => {
-    console.log(data);
-  };
-
-  return (
-    <main>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          name="email"
-          placeholder="ex: jhon@doe.com"
-          ref={register({ required: true })}
-        />
-        <Input
-          name="password"
-          type="password"
-          placeholder="Password"
-          ref={register({ required: true })}
-        />
-
-        <button disabled={!formState.isValid}>Proximo</button>
-      </form>
-    </main>
+  const [currentPage, setCurrentPage] = useState<CurrentPage>(
+    CurrentPage.Address
   );
+
+  return <main>{Pages[currentPage]}</main>;
 };
 
 export default App;
